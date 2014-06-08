@@ -106,6 +106,68 @@ class ZipCodeEngine {
 
 
 
+  /**
+   * Return latitude
+   *
+   * @access public
+   * @param void
+   * @return decimal
+   */
+  public function latitude() {
+
+    return $this->getValueByAlias('latitude');
+
+  } /* function latitude */
+
+
+
+  /**
+   * Return longitude
+   *
+   * @access public
+   * @param void
+   * @return decimal
+   */
+  public function longitude() {
+
+    return $this->getValueByAlias('longitude');
+
+  } /* function longitude */
+
+
+
+  /**
+   * Return zip code
+   *
+   * @access public
+   * @param void
+   * @return string
+   */
+  public function zipCode() {
+
+    return $this->getValueByAlias('zip_code');
+
+  } /* function zipCode */
+
+
+
+  /**
+   * We are using aliases to reference actual fields in the model. Grab the
+   * actual name of the field from the config file and return the value
+   * of the column we are trying to access via the alias.
+   *
+   * @access private
+   * @param string $column
+   * @return string
+   */
+  private function getValueByAlias($column) {
+
+    return $this->{$this->zipCode->getConfigValue($column)};
+
+  } /* function getValue */
+
+
+
  /**
   * Magic methods to return Model properties
   *

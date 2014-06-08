@@ -170,6 +170,21 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
 
   } /* function nearest */
 
+
+
+  /**
+   * Return a configuration value
+   *
+   * @access public
+   * @param string $key
+   * @return string
+   */
+  public function getConfigValue($key) {
+
+    return $this->config->get("ardan/zipcode::{$key}");
+
+  } /* function getConfigValue */
+
 } /* class ZipCodeRepository */
 
 /* EOF */

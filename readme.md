@@ -71,8 +71,13 @@ Examples:
 $zipCode = Zipcode::find('90210');
 
 // Return a property of the zip code record
-Zipcode::zip_code();
-$zipCode->latitude;
+// These three methods are agnostic of your database column names
+Zipcode::zipCode();
+Zipcode::latitude();
+Zipcode::longitude();
+
+// Access any other column using its name
+Zipcode::my_column();
 
 // Calculate distance between two zip codes
 Zipcode::distance($zipCode, '84102', "miles");
@@ -105,3 +110,4 @@ for a free database or purchase from [http://www.zip-codes.com/zip-code-database
 * Unit test the ZipCodeRepository
 * Unit test the artisan commands
 * Better documentation!
+* Need consistent API. ZipCodeEngine returns a model, but retains an array of the columns. Can access properties of the array via  method or as a property. Pick one!
