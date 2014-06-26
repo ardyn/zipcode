@@ -1,13 +1,13 @@
 <?php
 
-namespace Ardan\Zipcode\Artisan\Commands;
+namespace Ardyn\Zipcode\Artisan\Commands;
 
 use Illuminate\Filesystem\Filesystem;
-use Ardan\Zipcode\Artisan\DatabaseSeeder;
+use Ardyn\Zipcode\Artisan\DatabaseSeeder;
 use Illuminate\Config\Repository as Config;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Ardan\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
+use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
 
 class SeedCommand extends ZipCodeCommand {
 
@@ -28,7 +28,7 @@ class SeedCommand extends ZipCodeCommand {
   /**
    * Database Seeder
    *
-   * @var \Ardan\Zipcode\Artisan\DatabaseSeeder
+   * @var \Ardyn\Zipcode\Artisan\DatabaseSeeder
    */
   protected $seeder;
 
@@ -40,7 +40,7 @@ class SeedCommand extends ZipCodeCommand {
    * @access public
    * @param \Illuminate\Config\Repository $config
    * @param \Illuminate\Filesystem\Filesystem $file
-   * @param \Ardan\Zipcode\Artisan\DatabaseSeeder $seeder
+   * @param \Ardyn\Zipcode\Artisan\DatabaseSeeder $seeder
    * @return void
    */
   public function __construct(

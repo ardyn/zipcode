@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Zipcode\Artisan\Exceptions;
+namespace Ardyn\Zipcode\Artisan\Exceptions;
 
 class FileExistsException extends \Exception { }
 

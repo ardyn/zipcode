@@ -1,13 +1,13 @@
 <?php
 
-namespace Ardan\Zipcode;
+namespace Ardyn\Zipcode;
 
 use SplFileObject;
 use Illuminate\Support\ServiceProvider;
-use Ardan\Zipcode\Artisan\DatabaseSeeder;
-use Ardan\Zipcode\Artisan\MigrationBuilder;
-use Ardan\Zipcode\Artisan\Commands\SeedCommand;
-use Ardan\Zipcode\Artisan\Commands\MigrateCommand;
+use Ardyn\Zipcode\Artisan\DatabaseSeeder;
+use Ardyn\Zipcode\Artisan\MigrationBuilder;
+use Ardyn\Zipcode\Artisan\Commands\SeedCommand;
+use Ardyn\Zipcode\Artisan\Commands\MigrateCommand;
 
 class ZipCodeServiceProvider extends ServiceProvider {
 
@@ -30,13 +30,13 @@ class ZipCodeServiceProvider extends ServiceProvider {
   public function boot() {
 
     $this->app->bind(
-      'Ardan\Zipcode\Repositories\ZipCodeInterface',
-      $this->app['config']->get('ardan/zipcode::repository')
+      'Ardyn\Zipcode\Repositories\ZipCodeInterface',
+      $this->app['config']->get('ardyn/zipcode::repository')
     );
 
     $this->app->bind(
-      'Ardan\Zipcode\Models\ZipCodeModelInterface',
-      $this->app['config']->get('ardan/zipcode::model')
+      'Ardyn\Zipcode\Models\ZipCodeModelInterface',
+      $this->app['config']->get('ardyn/zipcode::model')
     );
 
   } /* function boot */
@@ -52,7 +52,7 @@ class ZipCodeServiceProvider extends ServiceProvider {
   */
   public function register() {
 
-    $this->package('ardan/zipcode', 'ardan/zipcode');
+    $this->package('ardyn/zipcode', 'ardyn/zipcode');
 
     $this->registerModel();
     $this->registerRepository();
@@ -171,7 +171,7 @@ class ZipCodeServiceProvider extends ServiceProvider {
 
     $this->app['zipcode.model'] = $this->app->share(function ($app) {
 
-      $model = $app['config']->get('ardan/zipcode::model');
+      $model = $app['config']->get('ardyn/zipcode::model');
       return new $model();
 
     });
@@ -191,7 +191,7 @@ class ZipCodeServiceProvider extends ServiceProvider {
 
     $this->app['zipcode.repository'] = $this->app->share(function ($app) {
 
-      $repository = $app['config']->get('ardan/zipcode::repository');
+      $repository = $app['config']->get('ardyn/zipcode::repository');
 
       return new $repository(
         $app['zipcode.model'],

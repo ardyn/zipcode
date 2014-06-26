@@ -13,12 +13,12 @@ Edit your `composer.json` file:
 
 ```json
 "require": {
-  "ardan/zipcode": "dev-master"
+  "ardyn/zipcode": "dev-master"
 },
 "repositories": [
   {
     "type": "git",
-    "url": "https://ardan@bitbucket.org/ardan/zipcode.git"
+    "url": "https://github.com/ardyn/zipcode.git"
   }
 ]
 ```
@@ -26,21 +26,21 @@ Run `composer update`.
 
 ### Publish Configuration Files
 
-If you want to change default configuration settings, run `php artisan config:publish ardan/zipcode`,
-then modify the contents of `app/config/packages/ardan/zipcode/config.php`.
+If you want to change default configuration settings, run `php artisan config:publish ardyn/zipcode`,
+then modify the contents of `app/config/packages/ardyn/zipcode/config.php`.
 
 ### Integrate with Laravel
 
 Add the following to the `providers` array in your `app/config.php` file:
 
 ```php
-'Ardan\Zipcode\ZipCodeServiceProvider'
+'Ardyn\Zipcode\ZipCodeServiceProvider'
 ```
 
 Add the alias in `aliases` array:
 
 ```php
-'Zipcode' => 'Ardan\Zipcode\Facades\ZipCode'
+'Zipcode' => 'Ardyn\Zipcode\Facades\ZipCode'
 ```
 
 ### Database Setup
@@ -62,22 +62,21 @@ Some methods are cached forever. You may want to clear your cache after updating
 ## Usage
 
 Usage is incredibly simple. Just call `Zipcode::find($zipCode)` to return a ZipCode model.
-The `Zipcode` will also remember the last found zip code which you can access fields by `Zipcode::fieldName()`.
 
 Examples:
 
 ```php
-// Finds the zip code and returns an array
+// Finds the zip code and returns the ZipCodeEngine class
 $zipCode = Zipcode::find('90210');
 
 // Return a property of the zip code record
 // These three methods are agnostic of your database column names
-Zipcode::zipCode();
-Zipcode::latitude();
-Zipcode::longitude();
+$zipCode->zipCode();
+$zipCode->latitude();
+$zipCode->longitude();
 
 // Access any other column using its name
-Zipcode::my_column();
+$zipCode->my_column;
 
 // Calculate distance between two zip codes
 Zipcode::distance($zipCode, '84102', "miles");
@@ -95,7 +94,7 @@ When calling the distance method or the radiusSearch method, you can supply a 'u
 
 ## Extending the Package
 
-You may over-ride the default Model by editing the `config.php` file to use your own model, which must implement `Ardan\Zipcode\Models\ZipCodeModelInterface`.
+You may over-ride the default Model by editing the `config.php` file to use your own model, which must implement `ardyn\Zipcode\Models\ZipCodeModelInterface`.
 The repository may also be extended.
 
 To change the model primaryKey, or table, you can just edit the `config.php` file as the provided ZipCodeRepository class will set those fields on the model.
@@ -110,4 +109,4 @@ for a free database or purchase from [http://www.zip-codes.com/zip-code-database
 * Unit test the ZipCodeRepository
 * Unit test the artisan commands
 * Better documentation!
-* Need consistent API. ZipCodeEngine returns a model, but retains an array of the columns. Can access properties of the array via  method or as a property. Pick one!
+* Find should return a StdClass instead of an Eloquent Model

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Zipcode\Facades;
+namespace Ardyn\Zipcode\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

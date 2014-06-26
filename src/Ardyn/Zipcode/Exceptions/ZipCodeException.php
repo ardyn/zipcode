@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Zipcode\Exceptions;
+namespace Ardyn\Zipcode\Exceptions;
 
 use Exception;
 

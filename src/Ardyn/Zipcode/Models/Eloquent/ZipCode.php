@@ -1,10 +1,10 @@
 <?php
 
-namespace Ardan\Zipcode\Models\Eloquent;
+namespace Ardyn\Zipcode\Models\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Config\Repository as Config;
-use Ardan\Zipcode\Models\ZipCodeModelInterface;
+use Ardyn\Zipcode\Models\ZipCodeModelInterface;
 
 class ZipCode extends Eloquent implements ZipCodeModelInterface {
 

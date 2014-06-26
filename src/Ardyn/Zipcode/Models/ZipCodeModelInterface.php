@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Zipcode\Models;
+namespace Ardyn\Zipcode\Models;
 
 interface ZipCodeModelInterface {
 

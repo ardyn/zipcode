@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Zipcode\Artisan\Commands;
+namespace Ardyn\Zipcode\Artisan\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Config\Repository as Config;
@@ -117,7 +117,7 @@ abstract class ZipCodeCommand extends Command {
    */
   protected function config($key, $default=null) {
 
-    return $this->config->get("ardan/zipcode::{$key}", $default);
+    return $this->config->get("ardyn/zipcode::{$key}", $default);
 
   } /* function config */
 

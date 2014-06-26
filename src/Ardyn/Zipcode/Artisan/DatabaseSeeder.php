@@ -1,10 +1,10 @@
 <?php
 
-namespace Ardan\Zipcode\Artisan;
+namespace Ardyn\Zipcode\Artisan;
 
 use SplFileObject;
 use Illuminate\Config\Repository as Config;
-use Ardan\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
+use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
 
 /**
  * @TODO Writing SQL here and escaping with mysql_real_escape_string. Use PDO instead?
@@ -81,7 +81,7 @@ class DatabaseSeeder {
     $headers = $file->fgetcsv();
     $columns = $this->getColumns($columns, $headers);
 
-    $zipCodeKey = key(array_intersect($columns, [ $this->config->get('ardan/zipcode::zip_code') ]));
+    $zipCodeKey = key(array_intersect($columns, [ $this->config->get('ardyn/zipcode::zip_code') ]));
 
     $table = $this->prepareTable($file, $zipCodeKey);
     $file = null;
@@ -145,8 +145,8 @@ class DatabaseSeeder {
    */
   public function delete() {
 
-    \DB::connection($this->config->get('ardan/zipcode::connection'))
-      ->table($this->config->get('ardan/zipcode::table'))
+    \DB::connection($this->config->get('ardyn/zipcode::connection'))
+      ->table($this->config->get('ardyn/zipcode::table'))
       ->delete();
 
   } /* function delete */
@@ -190,7 +190,7 @@ class DatabaseSeeder {
    */
   protected function createInsertStatement(array $columns) {
 
-    $sql  = 'INSERT INTO '.$this->config->get('ardan/zipcode::table') .'(';
+    $sql  = 'INSERT INTO '.$this->config->get('ardyn/zipcode::table') .'(';
 
     foreach ( $columns as $column )
       $sql .= "`{$column}`,";
@@ -239,7 +239,7 @@ class DatabaseSeeder {
    */
   protected function executeStatement($sql) {
 
-    \DB::connection($this->config->get('ardan/zipcode::connection'))
+    \DB::connection($this->config->get('ardyn/zipcode::connection'))
       ->unprepared($sql);
 
   } /* function executeQuery */

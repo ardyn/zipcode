@@ -1,19 +1,19 @@
 <?php
 
-namespace Ardan\Zipcode\Repositories\Eloquent;
+namespace Ardyn\Zipcode\Repositories\Eloquent;
 
-use Ardan\Zipcode\Repositories\ZipCodeInterface;
-use Ardan\Zipcode\Models\ZipCodeModelInterface as ZipCode;
+use Ardyn\Zipcode\Repositories\ZipCodeInterface;
+use Ardyn\Zipcode\Models\ZipCodeModelInterface as ZipCode;
 use Illuminate\Config\Repository as Config;
-use Ardan\Zipcode\Repositories\AbstractZipCodeRepository;
-use Ardan\Zipcode\Exceptions\ZipCodeNotFoundException;
+use Ardyn\Zipcode\Repositories\AbstractZipCodeRepository;
+use Ardyn\Zipcode\Exceptions\ZipCodeNotFoundException;
 
 class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInterface {
 
  /**
   * ZipCode Model
   *
-  * @var \Ardan\Zipcode\Models\ZipCodeModelInterface
+  * @var \Ardyn\Zipcode\Models\ZipCodeModelInterface
   */
   private $model;
 
@@ -44,7 +44,7 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
   * Constructor
   *
   * @access public
-  * @param \Ardan\Zipcode\Models\ZipCodeModelInterface $zipCode
+  * @param \Ardyn\Zipcode\Models\ZipCodeModelInterface $zipCode
   * @param \Illuminate\Config\Repository $config
   * @return void
   */
@@ -54,14 +54,14 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
 
     // Setup the Model
     $this->model = $zipCode;
-    $this->model->setConnection($config->get('ardan/zipcode::connection'));
-    $this->model->setTable($config->get('ardan/zipcode::table'));
-    $this->model->setPrimarykey($config->get('ardan/zipcode::zip_code'));
+    $this->model->setConnection($config->get('ardyn/zipcode::connection'));
+    $this->model->setTable($config->get('ardyn/zipcode::table'));
+    $this->model->setPrimarykey($config->get('ardyn/zipcode::zip_code'));
 
     // Field Names
-    $this->zipCode = $config->get('ardan/zipcode::zip_code');
-    $this->latitude = $config->get('ardan/zipcode::latitude');
-    $this->longitude = $config->get('ardan/zipcode::longitude');
+    $this->zipCode = $config->get('ardyn/zipcode::zip_code');
+    $this->latitude = $config->get('ardyn/zipcode::latitude');
+    $this->longitude = $config->get('ardyn/zipcode::longitude');
 
   } /* function __construct */
 
@@ -72,7 +72,7 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
   *
   * @access public
   * @param string   $zipCode
-  * @return \Ardan\Zipcode\Models\Eloquent\ZipCode
+  * @return \Ardyn\Zipcode\Models\Eloquent\ZipCode
   */
   public function findByZipCode($zipCode) {
 
@@ -156,7 +156,7 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
   * @param string $latitude
   * @param string $longitude
   * @param string [$unit]
-  * @return \Ardan\Zipcode\Models\ZipCodeModelInterface
+  * @return \Ardyn\Zipcode\Models\ZipCodeModelInterface
   */
   public function nearest($latitude, $longitude, $unit=null) {
 
@@ -181,7 +181,7 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
    */
   public function getConfigValue($key) {
 
-    return $this->config->get("ardan/zipcode::{$key}");
+    return $this->config->get("ardyn/zipcode::{$key}");
 
   } /* function getConfigValue */
 

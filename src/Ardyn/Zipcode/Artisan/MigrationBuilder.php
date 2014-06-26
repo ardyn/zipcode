@@ -1,10 +1,10 @@
 <?php
 
-namespace Ardan\Zipcode\Artisan;
+namespace Ardyn\Zipcode\Artisan;
 
 use SplFileObject;
 use Illuminate\Config\Repository as Config;
-use Ardan\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
+use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
 
 class MigrationBuilder {
 
@@ -65,7 +65,7 @@ class MigrationBuilder {
       'longitude',
     ] as $key ) {
 
-      $template = str_replace("#{$key}#", $this->config->get("ardan/zipcode::{$key}"), $template);
+      $template = str_replace("#{$key}#", $this->config->get("ardyn/zipcode::{$key}"), $template);
 
     }
 
@@ -86,7 +86,7 @@ class MigrationBuilder {
    */
   protected function loadMigrationTemplate() {
 
-    $templateFile = $this->config->get('ardan/zipcode::migration_file') ?: __DIR__.'/../../../migration_table.tpl';
+    $templateFile = $this->config->get('ardyn/zipcode::migration_file') ?: __DIR__.'/../../../migration_table.tpl';
     return file_get_contents($templateFile);
 
   } /* function loadMigrationTemplate */
@@ -134,9 +134,9 @@ class MigrationBuilder {
   protected function getReplacements() {
 
     return [
-      $zip = $this->config->get('ardan/zipcode::zip_code') => "      \$table->char('{$zip}', 5);",
-      $lat = $this->config->get('ardan/zipcode::latitude') => "      \$table->decimal('{$lat}', 9, 6);",
-      $long = $this->config->get('ardan/zipcode::longitude') => "      \$table->decimal('{$long}', 9, 6);",
+      $zip = $this->config->get('ardyn/zipcode::zip_code') => "      \$table->char('{$zip}', 5);",
+      $lat = $this->config->get('ardyn/zipcode::latitude') => "      \$table->decimal('{$lat}', 9, 6);",
+      $long = $this->config->get('ardyn/zipcode::longitude') => "      \$table->decimal('{$long}', 9, 6);",
     ];
 
   } /* function getReplacements */

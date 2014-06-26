@@ -1,10 +1,10 @@
 {
-  "name": "ardan/zipcode",
+  "name": "ardyn/zipcode",
   "description": "A zip code database for your projects.",
   "authors": [
       {
-          "name": "Andrew Ardan",
-          "email": "andrew@example.com"
+          "name": "Shawn Solinko",
+          "email": "shawnsolinko@gmail.com"
       }
   ],
   "require": {
@@ -19,7 +19,7 @@
   },
   "autoload": {
       "psr-0": {
-          "Ardan\\Zipcode": "src/"
+          "Ardyn\\Zipcode": "src/"
       },
       "classmap": [
         "src/seeds",

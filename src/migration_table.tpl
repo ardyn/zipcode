@@ -4,7 +4,7 @@ use Illuminate\Repository\Config;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArdanZipCodesTable extends Migration {
+class CreateArdynZipCodesTable extends Migration {
 
   /**
    * Run the migrations.
@@ -40,6 +40,6 @@ class CreateArdanZipCodesTable extends Migration {
 
   } /* function down */
 
-} /* class CreateArdanZipCodesTable */
+} /* class CreateArdynZipCodesTable */
 
 /* EOF */

@@ -42,14 +42,14 @@ return array(
   *
   * @var string
   */
-  'repository' => '\Ardan\Zipcode\Repositories\Eloquent\ZipCodeRepository',
+  'repository' => '\Ardyn\Zipcode\Repositories\Eloquent\ZipCodeRepository',
 
  /**
   * Model class for the Engine
   *
   * @var string
   */
-  'model' => '\Ardan\Zipcode\Models\Eloquent\ZipCode',
+  'model' => '\Ardyn\Zipcode\Models\Eloquent\ZipCode',
 
  /**
   * Default unit to use
@@ -70,14 +70,14 @@ return array(
    *
    * @var string
    */
-  'migration_file' => base_path('vendor/ardan/zipcode/src/migration_table.tpl'),
+  'migration_file' => base_path('vendor/ardyn/zipcode/src/migration_table.tpl'),
 
   /**
    * Source file to build migrations and seed table
    *
    * @var string
    */
-  'source_file' => base_path('vendor/ardan/zipcode/src/sample.csv'),
+  'source_file' => base_path('vendor/ardyn/zipcode/src/sample.csv'),
 
 );
 

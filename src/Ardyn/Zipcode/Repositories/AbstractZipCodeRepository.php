@@ -1,9 +1,9 @@
 <?php
 
-namespace Ardan\Zipcode\Repositories;
+namespace Ardyn\Zipcode\Repositories;
 
 use Illuminate\Config\Repository as Config;
-use Ardan\Zipcode\Exceptions\UnitNotFoundException;
+use Ardyn\Zipcode\Exceptions\UnitNotFoundException;
 
 abstract class AbstractZipCodeRepository {
 
@@ -56,7 +56,7 @@ abstract class AbstractZipCodeRepository {
   protected function getUnitConstant($unit) {
 
     if ( ! $unit )
-      $unit = $this->config->get('ardan/zipcode::default_unit');
+      $unit = $this->config->get('ardyn/zipcode::default_unit');
 
     switch ( strtolower($unit) ) {
 

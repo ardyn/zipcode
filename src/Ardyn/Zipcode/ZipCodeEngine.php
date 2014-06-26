@@ -1,16 +1,15 @@
 <?php
 
-namespace Ardan\Zipcode;
+namespace Ardyn\Zipcode;
 
-use Ardan\Zipcode\Repositories\ZipCodeInterface;
-use Ardan\Zipcode\Exceptions\AttributeNotFoundException;
+use Ardyn\Zipcode\Repositories\ZipCodeInterface;
 
 class ZipCodeEngine {
 
  /**
   * The ZipCode Repository
   *
-  * @var \Ardan\Zipcode\Repositories\ZipCodeInterface
+  * @var \Ardyn\Zipcode\Repositories\ZipCodeInterface
   */
   private $zipCode;
 
@@ -27,7 +26,7 @@ class ZipCodeEngine {
   * Constructor
   *
   * @access public
-  * @param \Ardan\Zipcode\Repositories\ZipCodeInterface
+  * @param \Ardyn\Zipcode\Repositories\ZipCodeInterface
   * @return void
   */
   public function __construct(ZipCodeInterface $zipCode) {
@@ -43,14 +42,14 @@ class ZipCodeEngine {
   *
   * @access public
   * @param sting $zipCode
-  * @return stdClass
+  * @return \Ardyn\Zipcode\ZipCodeEngine
   */
   public function find($zipCode) {
 
     $model = $this->zipCode->findByZipCode($zipCode);
     $this->fields = $model->toArray();
 
-    return $model;
+    return $this;
 
   } /* function find */
 
@@ -96,7 +95,7 @@ class ZipCodeEngine {
   * @access public
   * @param string $latitude
   * @param string $longitude
-  * @return \Ardan\Zipcode\Models\ZipCodeModelInterface
+  * @return \Ardyn\Zipcode\Models\ZipCodeModelInterface
   */
   public function nearest($latitude, $longitude) {
 
@@ -193,10 +192,18 @@ class ZipCodeEngine {
   */
   public function __get($attribute) {
 
-    if ( ! array_key_exists($attribute, $this->fields) )
-      throw new AttributeNotFoundException($attribute);
-
-    return $this->fields[$attribute];
+    switch ( $attribute ) {
+      case 'latitude':
+        return $this->latitude();
+      case 'longitude':
+        return $this->longitude();
+      case 'zipCode':
+        return $this->zipCode();
+      default:
+        if ( array_key_exists($attribute, $this->fields) )
+          return $this->fields[$attribute];
+        return null;
+    }
 
   } /* function __get */
 

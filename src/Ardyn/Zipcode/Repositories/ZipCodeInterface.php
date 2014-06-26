@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Zipcode\Repositories;
+namespace Ardyn\Zipcode\Repositories;
 
 interface ZipCodeInterface {
 
@@ -9,7 +9,7 @@ interface ZipCodeInterface {
   *
   * @access public
   * @param string $zipCode
-  * @return \Ardan\Zipcode\Models\ZipCodeModelInterface
+  * @return \Ardyn\Zipcode\Models\ZipCodeModelInterface
   */
   public function findByZipCode($zipCode);
 
@@ -43,7 +43,7 @@ interface ZipCodeInterface {
   * @param string $latitude
   * @param string $longitude
   * @param string [$unit]
-  * @return \Ardan\Zipcode\Models\ZipCodeModelInterface
+  * @return \Ardyn\Zipcode\Models\ZipCodeModelInterface
   */
   public function nearest($latitude, $longitude, $unit=null);
 

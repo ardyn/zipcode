@@ -1,14 +1,14 @@
 <?php
 
-namespace Ardan\Zipcode\Artisan\Commands;
+namespace Ardyn\Zipcode\Artisan\Commands;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem as File;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Ardan\Zipcode\Artisan\MigrationBuilder as Builder;
-use Ardan\Zipcode\Artisan\Exceptions\FileExistsException;
-use Ardan\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
+use Ardyn\Zipcode\Artisan\MigrationBuilder as Builder;
+use Ardyn\Zipcode\Artisan\Exceptions\FileExistsException;
+use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
 
 /**
  * Creates a migration from the config file
@@ -25,7 +25,7 @@ class MigrateCommand extends ZipCodeCommand {
    *
    * @const string
    */
-  const MIGRATION_TABLE_NAME = 'create_ardan_zip_codes_table';
+  const MIGRATION_TABLE_NAME = 'create_ardyn_zip_codes_table';
 
   /**
    * WGS84distance function migration name
@@ -53,7 +53,7 @@ class MigrateCommand extends ZipCodeCommand {
   /**
    * Migration Builder
    *
-   * @var \Ardan\Zipcode\MigrationBuilder
+   * @var \Ardyn\Zipcode\MigrationBuilder
    */
   protected $builder;
 
@@ -65,7 +65,7 @@ class MigrateCommand extends ZipCodeCommand {
    * @access public
    * @param \Illuminate\Config\Repository $config
    * @param \Illuminate\Filesystem\Filesystem $file
-   * @param \Ardan\Zipcode\Artisan\MigrationBuilder $builder
+   * @param \Ardyn\Zipcode\Artisan\MigrationBuilder $builder
    * @return void
    */
   public function __construct(
