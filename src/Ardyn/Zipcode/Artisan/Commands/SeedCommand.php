@@ -2,11 +2,9 @@
 
 namespace Ardyn\Zipcode\Artisan\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Ardyn\Zipcode\Artisan\DatabaseSeeder;
 use Illuminate\Config\Repository as Config;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
 
 class SeedCommand extends ZipCodeCommand {
@@ -39,17 +37,15 @@ class SeedCommand extends ZipCodeCommand {
    *
    * @access public
    * @param \Illuminate\Config\Repository $config
-   * @param \Illuminate\Filesystem\Filesystem $file
    * @param \Ardyn\Zipcode\Artisan\DatabaseSeeder $seeder
    * @return void
    */
   public function __construct(
     Config $config,
-    FileSystem $file,
     DatabaseSeeder $seeder
   ) {
 
-    parent::__construct($config, $file);
+    parent::__construct($config);
 
     $this->seeder = $seeder;
 
@@ -66,7 +62,7 @@ class SeedCommand extends ZipCodeCommand {
    */
   public function fire() {
 
-    $sourceFile = $this->getByArgumentOrConfig('source', 'source_file');
+    $sourceFile = $this->getByOptionOrConfig('source', 'source_file');
     $columns = $this->getColumns($this->option('columns'));
     $start = time();
 
@@ -90,7 +86,9 @@ class SeedCommand extends ZipCodeCommand {
       $this->info("Database Seeded in {$time} seconds!");
 
     } catch ( HeaderDoesNotExistException $e ) {
+
       $this->error("The column `".$e->getMessage()."` does not exist in {$sourceFile}");
+
     }
 
   } /* function fire */
@@ -108,26 +106,10 @@ class SeedCommand extends ZipCodeCommand {
 
     return [
       [ 'columns', 'c', InputOption::VALUE_REQUIRED, 'Comma deliminated list of columns to include in the seed.' ],
+      [ 'source', 's', InputOption::VALUE_REQUIRED, 'Data source as CSV file.' ],
     ];
 
   } /* function getOptions */
-
-
-
-  /**
-   * Return the arguments
-   *
-   * @access protected
-   * @param void
-   * @return array
-   */
-  protected function getArguments() {
-
-    return [
-      [ 'source', InputArgument::OPTIONAL, 'Data source as CSV file.' ],
-    ];
-
-  } /* function getArguments */
 
 } /* class SeedCommand */
 

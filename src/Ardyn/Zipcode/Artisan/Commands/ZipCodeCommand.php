@@ -4,7 +4,6 @@ namespace Ardyn\Zipcode\Artisan\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Config\Repository as Config;
-use Illuminate\Filesystem\Filesystem as File;
 
 abstract class ZipCodeCommand extends Command {
 
@@ -15,13 +14,6 @@ abstract class ZipCodeCommand extends Command {
    */
   protected $config;
 
-  /**
-   * Filesystem
-   *
-   * @var \Illuminate\Filesystem\Filesystem
-   */
-  protected $file;
-
 
 
   /**
@@ -29,18 +21,15 @@ abstract class ZipCodeCommand extends Command {
    *
    * @access public
    * @param \Illuminate\Config\Repository $config
-   * @param \Illuminate\Filesystem\Filesystem $file
    * @return void
    */
   public function __construct(
-    Config $config,
-    File $file
+    Config $config
   ) {
 
     parent::__construct();
 
     $this->config = $config;
-    $this->file = $file;
 
   } /* function __construct */
 

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -14,13 +15,14 @@ class AddWgs84distanceFunction extends Migration {
 
     $this->down();
 
+    $connection = Config::get('ardyn/zipcode::connection');
     $sql = <<<SQL
 CREATE FUNCTION WGS84distance( lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE )
 RETURNS DOUBLE
 RETURN ACOS(SIN(RADIANS(lat1)) * SIN(RADIANS(lat2)) + COS(RADIANS(lat1)) * COS(RADIANS(lat2)) * COS(RADIANS(lon2-lon1)));
 SQL;
 
-    DB::unprepared($sql);
+    DB::connection($connection)->unprepared($sql);
 
   } /* function up */
 
@@ -34,9 +36,10 @@ SQL;
   public function down() {
 
     // Drop our function
+    $connection = Config::get('ardyn/zipcode::connection');
     $sql = 'DROP FUNCTION IF EXISTS WGS84distance';
 
-    DB::unprepared($sql);
+    DB::connection($connection)->unprepared($sql);
 
   } /* function down */
 

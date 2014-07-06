@@ -58,7 +58,6 @@ class MigrationBuilder {
     $template = $this->loadMigrationTemplate();
 
     foreach ( [
-      'connection',
       'table',
       'zip_code',
       'latitude',

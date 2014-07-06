@@ -2,6 +2,7 @@
 
 namespace Ardyn\Zipcode\Artisan;
 
+use DB;
 use SplFileObject;
 use Illuminate\Config\Repository as Config;
 use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
@@ -145,7 +146,7 @@ class DatabaseSeeder {
    */
   public function delete() {
 
-    \DB::connection($this->config->get('ardyn/zipcode::connection'))
+    DB::connection($this->config->get('ardyn/zipcode::connection'))
       ->table($this->config->get('ardyn/zipcode::table'))
       ->delete();
 
@@ -239,7 +240,7 @@ class DatabaseSeeder {
    */
   protected function executeStatement($sql) {
 
-    \DB::connection($this->config->get('ardyn/zipcode::connection'))
+    DB::connection($this->config->get('ardyn/zipcode::connection'))
       ->unprepared($sql);
 
   } /* function executeQuery */

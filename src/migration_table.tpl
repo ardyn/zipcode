@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Repository\Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -13,7 +13,9 @@ class CreateArdynZipCodesTable extends Migration {
    */
   public function up() {
 
-    Schema::connection('#connection#')
+    $connection = Config::get('ardyn/zipcode::connection');
+
+    Schema::connection($connection)
       ->create('#table#', function(Blueprint $table) {
 
       // Create the zip_codes table
@@ -35,8 +37,10 @@ class CreateArdynZipCodesTable extends Migration {
    */
   public function down() {
 
+    $connection = Config::get('ardyn/zipcode::connection');
+
     // Drop the table
-    Schema::connection('#connection#')->drop('#table#');
+    Schema::connection($connection)->drop('#table#');
 
   } /* function down */
 

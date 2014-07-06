@@ -6,6 +6,7 @@ use SplFileObject;
 use Illuminate\Support\ServiceProvider;
 use Ardyn\Zipcode\Artisan\DatabaseSeeder;
 use Ardyn\Zipcode\Artisan\MigrationBuilder;
+use Ardyn\Zipcode\Artisan\MigrationPublisher;
 use Ardyn\Zipcode\Artisan\Commands\SeedCommand;
 use Ardyn\Zipcode\Artisan\Commands\MigrateCommand;
 
@@ -60,6 +61,7 @@ class ZipCodeServiceProvider extends ServiceProvider {
 
     $this->registerDatabaseSeeder();
     $this->registerMigrationBuilder();
+    $this->registerMigrationPublisher();
 
     $this->registerMigrateCommand();
     $this->registerSeedCommand();
@@ -123,8 +125,8 @@ class ZipCodeServiceProvider extends ServiceProvider {
 
       return new MigrateCommand(
         $app['config'],
-        $app['files'],
-        $app['zipcode.migration-builder']
+        $app['zipcode.migration-builder'],
+        $app['zipcode.migration-publisher']
       );
 
     });
@@ -132,6 +134,27 @@ class ZipCodeServiceProvider extends ServiceProvider {
     $this->commands('zipcode.migrate');
 
   } /* function registerMigrateCommand */
+
+
+
+  /**
+   * Register the migration publisher
+   *
+   * @access protected
+   * @param void
+   * @return void
+   */
+  protected function registerMigrationPublisher() {
+
+    $this->app->bindShared('zipcode.migration-publisher', function ($app) {
+
+      return new MigrationPublisher(
+        $app['files']
+      );
+
+    });
+
+  } /* function registerMigrationPublisher */
 
 
 
@@ -148,7 +171,6 @@ class ZipCodeServiceProvider extends ServiceProvider {
 
       return new SeedCommand(
         $app['config'],
-        $app['files'],
         $app['zipcode.database-seeder']
       );
 
@@ -163,15 +185,16 @@ class ZipCodeServiceProvider extends ServiceProvider {
  /**
   * Register the model service provider.
   *
-  * @access private
+  * @access protected
   * @param void
   * @return void
   */
-  private function registerModel() {
+  protected function registerModel() {
 
     $this->app['zipcode.model'] = $this->app->share(function ($app) {
 
       $model = $app['config']->get('ardyn/zipcode::model');
+
       return new $model();
 
     });
@@ -183,11 +206,11 @@ class ZipCodeServiceProvider extends ServiceProvider {
  /**
   * Register the repository service provider.
   *
-  * @access private
+  * @access protected
   * @param void
   * @return void
   */
-  private function registerRepository() {
+  protected function registerRepository() {
 
     $this->app['zipcode.repository'] = $this->app->share(function ($app) {
 
@@ -207,11 +230,11 @@ class ZipCodeServiceProvider extends ServiceProvider {
  /**
   * Register the zipcode service provider.
   *
-  * @access private
+  * @access protected
   * @param void
   * @return void
   */
-  private function registerZipcode() {
+  protected function registerZipcode() {
 
     $this->app['zipcode'] = $this->app->share(function ($app) {
 
@@ -232,7 +255,7 @@ class ZipCodeServiceProvider extends ServiceProvider {
   */
   public function provides() {
 
-    return array('zipcode');
+    return[ 'zipcode' ];
 
   } /* function provides */
 
