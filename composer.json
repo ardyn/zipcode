@@ -20,7 +20,7 @@
   "autoload": {
       "psr-0": {
           "Ardyn\\Zipcode": "src/"
-      },
+      }
   },
   "minimum-stability": "stable"
 }
