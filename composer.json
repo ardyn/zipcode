@@ -21,10 +21,6 @@
       "psr-0": {
           "Ardyn\\Zipcode": "src/"
       },
-      "classmap": [
-        "src/seeds",
-        "src/migrations"
-      ]
   },
   "minimum-stability": "stable"
 }
