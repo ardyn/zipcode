@@ -7,9 +7,6 @@ use SplFileObject;
 use Illuminate\Config\Repository as Config;
 use Ardyn\Zipcode\Artisan\Exceptions\HeaderDoesNotExistException;
 
-/**
- * @TODO Writing SQL here and escaping with mysql_real_escape_string. Use PDO instead?
- */
 class DatabaseSeeder {
 
   /**
@@ -220,7 +217,7 @@ class DatabaseSeeder {
 
     for ( $x = 0; $x < $len; $x++ )
       if ( array_key_exists($x, $columns) )
-        $str .= "'".@mysql_real_escape_string($line[$x])."',";
+        $str .= "'".str_replace("'", "\\'", $line[$x])."',";
 
     $str = rtrim($str, ',');
     $str .= '),'.PHP_EOL;
