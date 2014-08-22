@@ -44,51 +44,6 @@ abstract class AbstractZipCodeRepository {
 
   } /* function __construct */
 
-
-
- /**
-  * Return distance constant given string name
-  *
-  * @access protected
-  * @param string $unit
-  * @return decimal
-  */
-  protected function getUnitConstant($unit) {
-
-    if ( ! $unit )
-      $unit = $this->config->get('ardyn/zipcode::default_unit');
-
-    switch ( strtolower($unit) ) {
-
-      case "miles":
-        return self::MILES;
-
-      case "feet":
-        return self::FEET;
-
-      case "km":
-      case "kilometers":
-        return self::KILOMETERS;
-
-      case "m":
-      case "meters":
-        return self::METERS;
-
-      case "deg":
-      case "degrees":
-        return self::DEGREES;
-
-      case "rad":
-      case "radians":
-        return self::RADIANS;
-
-      default:
-        throw new UnitNotFoundException($unit);
-
-    }
-
-  } /* function getUnitConstant */
-
 } /* class AbstractZipCodeRepository */
 
 /* EOF */

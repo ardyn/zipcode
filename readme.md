@@ -105,7 +105,8 @@ The provided zip code data in `/src/sample.csv` is only for demonstration purpos
 for a free database or purchase from [http://www.zip-codes.com/zip-code-database.asp] for a database with more accurate WGS84 coordiantes.
 
 ## TODO
-
+* Refactor this shit!
+* Semantic versioning!
 * Unit test the ZipCodeRepository
 * Unit test the artisan commands
 * Better documentation!

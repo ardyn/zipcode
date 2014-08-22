@@ -3,13 +3,6 @@
 return array(
 
  /**
-  * Database connection to use
-  *
-  * @var string
-  */
-  'connection' => Config::get('database.default'),
-
- /**
   * Database table to use
   *
   * @var string
@@ -56,7 +49,7 @@ return array(
   *
   * @var string
   */
-  'default_unit' => 'miles',
+  'default_unit' => Ardyn\Zipcode\Repositories\AbstractZipCodeRepository::MILES,
 
   /**
    * Path to migrations folder

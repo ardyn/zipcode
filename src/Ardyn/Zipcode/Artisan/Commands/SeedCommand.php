@@ -66,7 +66,7 @@ class SeedCommand extends ZipCodeCommand {
     $columns = $this->getColumns($this->option('columns'));
     $start = time();
 
-    $response = $this->confirm("This command will delete the `".$this->config('table')."` table and then seed the '".$this->config('connection')."' database.\n  Do you want to continue? [y|n]");
+    $response = $this->confirm("This command will delete the `".$this->config('table')."` table and then seed the '".$this->config('database.default')."' database.\n  Do you want to continue? [y|n]");
 
     if ( ! $response )
       return;

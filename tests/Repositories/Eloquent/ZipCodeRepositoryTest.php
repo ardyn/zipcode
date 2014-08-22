@@ -1,10 +1,12 @@
 <?php
 
 namespace Repositories\Eloquent;
+
+use Config;
+use Artisan;
 use \TestCase;
 use Mockery as m;
-use Artisan;
-use Config;
+use Ardyn\Zipcode\Repositories\AbstractZipCodeRepository as Zip;
 
 class ZipCodeRepositoryTest extends TestCase {
 
@@ -22,29 +24,29 @@ class ZipCodeRepositoryTest extends TestCase {
     // Mock Config
     $mockedConfig = m::mock('\Illuminate\Config\Repository');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::connection')
+       ->with('ardyn/zipcode::connection')
        ->andReturn('local');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::table')
+       ->with('ardyn/zipcode::table')
        ->andReturn('zip_codes');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::primary_key')
+       ->with('ardyn/zipcode::primary_key')
        ->andReturn('ID');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::zip_code')
+       ->with('ardyn/zipcode::zip_code')
        ->andReturn('ZipCode');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::latitude')
+       ->with('ardyn/zipcode::latitude')
        ->andReturn('Latitude');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::longitude')
+       ->with('ardyn/zipcode::longitude')
        ->andReturn('Longitude');
     $mockedConfig->shouldReceive('get')
-       ->with('ardan/zipcode::default_unit')
-       ->andReturn('miles');
+       ->with('ardyn/zipcode::default_unit')
+       ->andReturn(Zip::MILES);
 
-    $this->repository = new \Ardan\Zipcode\Repositories\Eloquent\ZipCodeRepository(
-      new \Ardan\Zipcode\Models\Eloquent\ZipCode, // We need to touch the database.
+    $this->repository = new \Ardyn\Zipcode\Repositories\Eloquent\ZipCodeRepository(
+      new \Ardyn\Zipcode\Models\Eloquent\ZipCode, // We need to touch the database.
       $mockedConfig
     );
 
@@ -59,9 +61,9 @@ class ZipCodeRepositoryTest extends TestCase {
   */
   public function testFindByZipCode() {
 
-    $result = $this->repository->findByZipCode('34050');
+    $result = $this->repository->findByZipCode('00501');
 
-    $this->assertInstanceOf('Ardan\Zipcode\Models\Eloquent\ZipCode', $result);
+    $this->assertInstanceOf('Ardyn\Zipcode\Models\Eloquent\ZipCode', $result);
 
   } /* function testFindByZipCode */
 
@@ -71,7 +73,7 @@ class ZipCodeRepositoryTest extends TestCase {
   * Test findByZipCode exception thrown
   *
   * @test
-  * @expectedException Ardan\Zipcode\Exceptions\ZipCodeNotFoundException
+  * @expectedException Ardyn\Zipcode\Exceptions\ZipCodeNotFoundException
   */
   public function testFindByZipCodeFails() {
 
@@ -85,28 +87,13 @@ class ZipCodeRepositoryTest extends TestCase {
   * Test distanceBetween exception thrown
   *
   * @test
-  * @expectedException Ardan\Zipcode\Exceptions\ZipCodeNotFoundException
+  * @expectedException Ardyn\Zipcode\Exceptions\ZipCodeNotFoundException
   */
   public function testDistanceBetweenFailsOnZipCode() {
 
-    $result = $this->repository->distanceBetween('34050', 'invalid-zip-code', 'miles');
+    $result = $this->repository->distanceBetween('00501', 'invalid-zip-code', Zip::MILES);
 
   } /* function testDistanceBetweenFailsOnZipCode */
-
-
-
- /**
-  * Test distanceBetween exception thrown
-  *
-  * @test
-  * @expectedException Ardan\Zipcode\Exceptions\UnitNotFoundException
-  */
-  public function testDistanceBetweenFailsOnUnits() {
-
-    $result = $this->repository->distanceBetween('34050', '34034', 'invalid-unit');
-
-  } /* function testDistanceBetweenFailsOnUnits */
-
 
 
 

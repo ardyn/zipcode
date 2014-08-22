@@ -54,7 +54,6 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
 
     // Setup the Model
     $this->model = $zipCode;
-    $this->model->setConnection($config->get('ardyn/zipcode::connection'));
     $this->model->setTable($config->get('ardyn/zipcode::table'));
     $this->model->setPrimarykey($config->get('ardyn/zipcode::zip_code'));
 
@@ -103,10 +102,9 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
     $zip1 = $this->findByZipCode($zip1);
     $latitude = $zip1->{$this->latitude};
     $longitude = $zip1->{$this->longitude};
-    $constant = $this->getUnitConstant($unit);
 
     $result = $this->model
-      ->selectRaw("WGS84distance({$latitude}, {$longitude}, {$this->latitude}, {$this->longitude}) * $constant AS `distance`")
+      ->selectRaw("WGS84distance({$latitude}, {$longitude}, {$this->latitude}, {$this->longitude}) * $unit AS `distance`")
       ->where($this->zipCode, '=', $zip2)
       ->first();
 
@@ -134,13 +132,12 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
     $zipcode = $this->findByZipCode($zipCode);
     $latitude = $zipcode->{$this->latitude};
     $longitude = $zipcode->{$this->longitude};
-    $constant = $this->getUnitConstant($unit);
 
     // MySQL will cache the results of the distance function during the connection
     // After the connection closes, Laravel will rember this forever.
     return $this->model
       ->rememberForever()
-      ->selectRaw("*, WGS84distance($latitude, $longitude, `{$this->latitude}`, `{$this->longitude}`) * $constant AS distance")
+      ->selectRaw("*, WGS84distance($latitude, $longitude, `{$this->latitude}`, `{$this->longitude}`) * $unit AS distance")
       ->having('distance', '<=', $outerRadius)
       ->having('distance', '>=', $innerRadius)
       ->orderBy('distance', 'asc')
@@ -160,11 +157,9 @@ class ZipCodeRepository extends AbstractZipCodeRepository implements ZipCodeInte
   */
   public function nearest($latitude, $longitude, $unit=null) {
 
-    $constant = $this->getUnitConstant($unit);
-
     return $this->model
       ->rememberForever()
-      ->selectRaw("*, WGS84distance($latitude, $longitude, `{$this->latitude}`, `{$this->longitude}`) * $constant AS distance")
+      ->selectRaw("*, WGS84distance($latitude, $longitude, `{$this->latitude}`, `{$this->longitude}`) * $unit AS distance")
       ->orderBy('distance', 'asc')
       ->first();
 

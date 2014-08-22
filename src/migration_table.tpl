@@ -13,10 +13,7 @@ class CreateArdynZipCodesTable extends Migration {
    */
   public function up() {
 
-    $connection = Config::get('ardyn/zipcode::connection');
-
-    Schema::connection($connection)
-      ->create('#table#', function(Blueprint $table) {
+    Schema::create('#table#', function(Blueprint $table) {
 
       // Create the zip_codes table
 #columns#
@@ -37,10 +34,8 @@ class CreateArdynZipCodesTable extends Migration {
    */
   public function down() {
 
-    $connection = Config::get('ardyn/zipcode::connection');
-
     // Drop the table
-    Schema::connection($connection)->drop('#table#');
+    Schema::drop('#table#');
 
   } /* function down */
 

@@ -143,8 +143,7 @@ class DatabaseSeeder {
    */
   public function delete() {
 
-    DB::connection($this->config->get('ardyn/zipcode::connection'))
-      ->table($this->config->get('ardyn/zipcode::table'))
+    DB::table($this->config->get('ardyn/zipcode::table'))
       ->delete();
 
   } /* function delete */
@@ -237,8 +236,7 @@ class DatabaseSeeder {
    */
   protected function executeStatement($sql) {
 
-    DB::connection($this->config->get('ardyn/zipcode::connection'))
-      ->unprepared($sql);
+    DB::unprepared($sql);
 
   } /* function executeQuery */
 
