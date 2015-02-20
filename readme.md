@@ -13,14 +13,8 @@ Edit your `composer.json` file:
 
 ```json
 "require": {
-  "ardyn/zipcode": "dev-master"
-},
-"repositories": [
-  {
-    "type": "git",
-    "url": "https://github.com/ardyn/zipcode.git"
-  }
-]
+  "ardyn/zipcode": "0.5"
+}
 ```
 Run `composer update`.
 
